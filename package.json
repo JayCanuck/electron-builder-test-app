@@ -1,6 +1,6 @@
 {
 	"name": "electron-builder-test-app",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"description": "A specialized template for an Enact Electron application.",
 	"homepage": "http://example.com",
 	"author": "AUTHOR <email@example.com>",

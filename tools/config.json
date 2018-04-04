@@ -16,6 +16,12 @@
 			"electron-updater"
 		]
 	},
+	"linux": {
+		"target": [
+			{"target": "AppImage"},
+			{"target": "deb"}
+		]
+	},
 	"nsis": {
 		"oneClick": false,
 		"allowToChangeInstallationDirectory": true

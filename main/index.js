@@ -23,9 +23,11 @@ function createWindow () {
 
 	mainWindow.once('ready-to-show', () => {
 		mainWindow.show();
-		// Check for updates and notify the user as needed.
-		autoUpdater.checkForUpdatesAndNotify();
+		
 	});
+
+	// Check for updates and notify the user as needed.
+	autoUpdater.checkForUpdatesAndNotify();
 
 	// and load the index.html of the app.
 	mainWindow.loadURL(process.env.ELECTRON_START_URL || url.format({

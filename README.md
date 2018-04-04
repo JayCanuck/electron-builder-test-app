@@ -1,7 +1,7 @@
-This project was bootstrapped with [@enact/cli](https://github.com/enactjs/cli).
+This project was bootstrapped with [@enact/cli](https://github.com/enactjs/cli) using the [electron-builder template](https://github.com/JayCanuck/enact-template-electron-builder).
 
 Below you will find some information on how to perform common tasks.  
-You can find the most recent version of this guide [here](https://github.com/enactjs/templates/blob/master/packages/moonstone/template/README.md).
+You can find the most recent version of this guide [here](https://github.com/JayCanuck/enact-template-electron-builder/blob/master/template/README.md).
 Additional documentation on @enact/cli can be found [here](https://github.com/enactjs/cli/blob/master/docs/index.md).
 
 ## Folder Structure
@@ -12,12 +12,12 @@ After creation, your project should look like this:
 my-app/
   README.md
   .gitignore
+  .travis.yml
   node_modules/
   package.json
   main/
     assets/
     index.js
-    wait-for-server.js
   renderer/
     App/
       App.js
@@ -28,12 +28,19 @@ my-app/
       MainPanel.js
     index.js
   resources/
+    ilibmanifest.json
+  tools/
+    assets/
+    config.json
+    build.js
+    dev-runner.js
 ```
 
 For the project to build, **these files must exist with exact filenames**:
 
 * `package.json` is the core package manifest for the project
-* `src/index.js` is the JavaScript entry point.
+* `main/index.js` is the main JavaScript entry point.
+* `renderer/index.js` is the renderer JavaScript entry point.
 
 You can delete or rename the other files.
 
@@ -61,15 +68,11 @@ Builds the project in development mode and keeps watch over the project director
 
 ### `npm run electron`
 
-Starts up an Electron shell and loads the latest renderer build from ./dist.
+Starts up an Electron shell and loads the latest renderer build from ./renderer-dist.
 
-### `npm run rebuild`
+### `npm run build`
 
-Rebuilds native binary dependencies via [electron-rebuild](https://github.com/electron/electron-rebuild).
-
-### `npm run stage`, `npm run stage-win`, `npm run stage-mac`, and `npm run stage-linux`
-
-Stages system-specific Electron binaries in standalone packages with the main thread and latest renderer build from ./dist. Outputs to ./bin.
+Stages system-specific Electron binaries in standalone packages with the main thread and latest renderer build from ./renderer-dist. Outputs to ./bin.
 
 ### `npm run clean`
 
@@ -105,15 +108,32 @@ For example:
   ...
   "enact": {
     "theme": "moonstone",
-    "nodeBuiltins": {
-      fs: 'empty',
-      net: 'empty',
-      tls: 'empty'
-    }
+    "target": "electron-renderer"
   }
   ...
 } 
 ```
+
+## Electron Builder Options
+
+In order for the `npm run build` command to work as intended, information about the project will be sourced from both `./package.json` and `./tools/config.json`. Please be sure to keep those files up-to-date and accurate.  The `./tools/config.json` acts as the [configuration options for the `electron-builder`](https://www.electron.build/configuration/configuration) and can be expanded/modified as desired.
+
+Additionally, there is added support for a special `buildDependencies` array option, which can be added to the `./package.json` or added to the `extraMetadata` object in the `./tools/config.json` file (which is the default setup). When used, production dependencies listed in this array will be copied and included,along with their children dependences, during `npm run build`. This is useful for including main thread dependencies but excluding renderer dependencies.
+
+## Automated GitHub Release
+
+A key feature of this template's default configuration is support for automated builds cross-platform for versioned releases.
+
+**Setup**
+* Enable [Travis-CI](https://travis-ci.org) for your project repository.
+* Create a new GitHub access token [from here](https://github.com/settings/tokens/new). It can be called anything, but much have the `repo` tree of access checkboxed. This will generate a key value for you.
+* On the Travis webpage for your repository, go to the 'Settings' section and set a new environment variable named `GH_TOKEN` with the value of the key you just generated.
+
+Once that's complete, anytime you push a new tag of a versioned release (eg. `1.0.0`), Travis will generate application installers for Window, Mac, and Linux. The application installers will be sent back to your GitHub repository webpage releases section. All that's left is to edit and publish the draft release that's there waiting for you.
+
+## Autoupdate Support
+
+A side effect of the automated release process is that this template can provide automatic in-app updating via `electron-updater`. This has been preconfigured, and as long as automated releases are setup as described above, users will automatically receive and install updates as they're released.  If a custom alternate approach is desired, the main thread can be modified to handle the [`electron-updater` API](https://www.electron.build/auto-update).
 
 ## Displaying Lint Output in the Editor
 

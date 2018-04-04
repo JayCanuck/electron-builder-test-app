@@ -27,10 +27,10 @@ script:
         -v ~/.cache/electron:/root/.cache/electron \
         -v ~/.cache/electron-builder:/root/.cache/electron-builder \
         electronuserland/builder:wine \
-        /bin/bash -c "npm install && npm install @enact/cli && npm run pack-p && npm run build -- --linux --win"
+        /bin/bash -c "npm install && npm install --global-style @enact/cli && npm run pack-p && npm run build -- --linux --win"
     else
       npm install
-      npm install @enact/cli
+      npm install --global-style @enact/cli
       npm run pack-p
       npm run build
     fi

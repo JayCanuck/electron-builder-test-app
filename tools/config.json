@@ -30,7 +30,7 @@
 		{
 			"provider": "github",
 			"vPrefixedTagName": false,
-			"releaseType": "release"
+			"releaseType": "draft"
 		}
 	]
 }

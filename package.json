@@ -1,9 +1,9 @@
 {
 	"name": "electron-builder-test-app",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "A specialized template for an Enact Electron application.",
 	"homepage": "http://example.com",
-	"author": "",
+	"author": "AUTHOR <email@example.com>",
 	"main": "main/index.js",
 	"browser": "renderer/index.js",
 	"scripts": {

@@ -12,22 +12,13 @@ let mainWindow;
 function createWindow () {
 	// Create the browser window.
 	mainWindow = new BrowserWindow({
+		title: 'MyApp',
 		width: 800,
 		height: 600,
 		backgroundColor: '#000000',
 		show: false,
-		icon: (process.platform==='win32'
-				? path.join(__dirname, 'assets', 'icon-mini.png')
-				: path.join(__dirname, 'assets', 'icon.png'))
+		icon: path.join(__dirname, 'assets', 'icon.png')
 	});
-
-	mainWindow.once('ready-to-show', () => {
-		mainWindow.show();
-		
-	});
-
-	// Check for updates and notify the user as needed.
-	autoUpdater.checkForUpdatesAndNotify();
 
 	// and load the index.html of the app.
 	mainWindow.loadURL(process.env.ELECTRON_START_URL || url.format({
@@ -35,6 +26,12 @@ function createWindow () {
 		protocol: 'file:',
 		slashes: true
 	}));
+
+	// Show the window once any behind-the-scenes prep work is done.
+	mainWindow.show();
+
+	// Check for updates and auto-update if needed.
+	autoUpdater.checkForUpdatesAndNotify();
 
 	// Open the DevTools.
 	// mainWindow.webContents.openDevTools()

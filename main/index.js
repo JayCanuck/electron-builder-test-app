@@ -23,6 +23,8 @@ function createWindow () {
 
 	mainWindow.once('ready-to-show', () => {
 		mainWindow.show();
+		// Check for updates and notify the user as needed.
+		autoUpdater.checkForUpdatesAndNotify();
 	});
 
 	// and load the index.html of the app.
@@ -48,9 +50,6 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
-
-// Check for updates and notify the user as needed.
-autoUpdater.checkForUpdatesAndNotify();
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {

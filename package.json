@@ -46,7 +46,7 @@
     "@enact/spotlight": ">=2.0.0-alpha <2.0.0",
     "@enact/ui": ">=2.0.0-alpha <2.0.0",
     "@enact/webos": ">=2.0.0-alpha <2.0.05",
-    "electron-updater": "^2.21.4",
+    "electron-updater": "^4",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"

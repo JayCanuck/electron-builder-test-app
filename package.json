@@ -21,7 +21,7 @@
   },
   "license": "UNLICENSED",
   "private": true,
-  "repository": "https://github.com/JayCanuck/enact-electron-testapp",
+  "repository": "https://github.com/JayCanuck/electron-testapp-enact",
   "enact": {
     "theme": "moonstone",
     "target": "electron-renderer"
